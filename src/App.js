@@ -1,9 +1,24 @@
+import React from 'react'
+import Row from './Row'
+import requests from './requests'
+
 import './App.css'
 
 function App() {
   return (
     <div className='App'>
-      <h1>What up!</h1>
+      <h1>Movie Trailer App</h1>
+      <Row
+        title='Netflix Originals'
+        fetchUrl={requests.fetchNetflixOriginals}
+        isLargeRow={true}
+      />
+      <Row title='Top Rated' fetchUrl={requests.fetchTopRated} />
+      <Row title='Action' fetchUrl={requests.fetchActionMovies} />
+      <Row title='Comedy' fetchUrl={requests.fetchComedyMovies} />
+      <Row title='Horror' fetchUrl={requests.fetchHorrorMovies} />
+      <Row title='Romance' fetchUrl={requests.fetchRomanceMovies} />
+      <Row title='Documentary' fetchUrl={requests.fetchDocumentaryMovies} />
     </div>
   )
 }
