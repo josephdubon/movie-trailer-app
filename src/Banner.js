@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import requests from './requests'
 import axios from './axios'
 
+import './Banner.css'
+
 function Banner() {
   const [movie, setMovie] = useState([])
 
@@ -17,12 +19,16 @@ function Banner() {
     fetchData()
   }, [])
 
+  function truncate(str, n) {
+    return str?.length > n ? str.substr(0, n - 1) + '...' : str
+  }
+
   return (
     <header
       className='banner'
       style={{
         backgroundSize: 'cover',
-        backgroundImage: `url(
+        backgroundImage: `linear-gradient(to bottom right, #000e1698, #8a200b85), url(
         'https://image.tmdb.org/t/p/original/${movie?.backdrop_path}'
       )`,
         backgroundPosition: 'center center',
@@ -30,9 +36,16 @@ function Banner() {
     >
       <div className='banner_contents'>
         {/* title */}
-        <h1>{movie?.title || movie?.name || movie?.original_name}</h1>
+        <h1 className='banner_title'>
+          {movie?.title || movie?.name || movie?.original_name}
+        </h1>
         {/* div > 2 bts */}
+        <div className='banner_buttons'>
+          <button className='banner_button'>Play</button>
+          <button className='banner_button'>My List</button>
+        </div>
         {/* description */}
+        <h1 className='banner_description'>{truncate(movie?.overview, 150)}</h1>
       </div>
     </header>
   )
